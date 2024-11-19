@@ -1,2 +1,2 @@
 # godot_learn
-godot learn and try
+我的第一个godot游戏
