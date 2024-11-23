@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -300.0
 # 尝试添加一个二段跳功能，通过空中和落地程维护个bool值来实现
 var CAN_DOUBLE_JUMP := true
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -17,6 +18,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and CAN_DOUBLE_JUMP:
+		# 播放跳跃音效
+		jump_sound.play()
 		velocity.y = JUMP_VELOCITY
 		# 当不在地面使用跳跃的时候消耗跳跃次数（两次使用bool，多次可能需要维护一个int值..?
 		if !is_on_floor():

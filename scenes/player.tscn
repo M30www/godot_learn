@@ -1,7 +1,24 @@
-[gd_scene load_steps=26 format=3 uid="uid://bj75hry50tc0f"]
+[gd_scene load_steps=31 format=3 uid="uid://bj75hry50tc0f"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i6tsr"]
 [ext_resource type="Texture2D" uid="uid://d4hh87tqwntsf" path="res://assets/sprites/knight.png" id="1_ppxc4"]
+[ext_resource type="AudioStream" uid="uid://4egbtutnivog" path="res://assets/sounds/jump.wav" id="3_a4xvg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf6nd"]
+atlas = ExtResource("1_ppxc4")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fnte"]
+atlas = ExtResource("1_ppxc4")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5137"]
+atlas = ExtResource("1_ppxc4")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cbbs"]
+atlas = ExtResource("1_ppxc4")
+region = Rect2(96, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olgsm"]
 atlas = ExtResource("1_ppxc4")
@@ -89,6 +106,23 @@ region = Rect2(224, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ktwld"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf6nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fnte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5137")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cbbs")
+}],
+"loop": false,
+"name": &"die",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_olgsm")
@@ -179,10 +213,14 @@ script = ExtResource("1_i6tsr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_ktwld")
-animation = &"jump"
+animation = &"die"
 autoplay = "idle"
-frame_progress = 0.190211
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_8qi3e")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a4xvg")
